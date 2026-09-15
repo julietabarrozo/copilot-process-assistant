@@ -6,7 +6,7 @@ beginDialog:
   actions:
     - kind: Question
       id: question_confirm_resolution
-      conversationOutcome: ResolvedImplicitly
+      conversationOutcome: ResolvedImplied
       alwaysPrompt: true
       variable: init:Topic.SurveyResponse
       prompt: "Did that answer your question?"

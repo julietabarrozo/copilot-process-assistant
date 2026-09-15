@@ -1,3 +1,64 @@
 kind: AdaptiveDialog
 startBehavior: CancelOtherTopics
 beginDialog:
+  kind: OnSystemRedirect
+  id: main
+  actions:
+    - kind: Question
+      id: question_confirm_resolution
+      conversationOutcome: ResolvedImplicitly
+      alwaysPrompt: true
+      variable: init:Topic.SurveyResponse
+      prompt: "Did that answer your question?"
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: condition_check_survey
+      conditions:
+        - id: condition_answered_yes
+          condition: =Topic.SurveyResponse == true
+          actions:
+            - kind: Question
+              id: question_end_conversation
+              interruptionPolicy:
+                allowInterruption: true
+              variable: init:Topic.EndConversation
+              prompt: "Would you like to end our conversation?"
+              entity: BooleanPrebuiltEntity
+
+            - kind: ConditionGroup
+              id: condition_check_end
+              conditions:
+                - id: condition_user_wants_end
+                  condition: =Topic.EndConversation == true
+                  actions:
+                    - kind: BeginDialog
+                      id: redirect_thank_you
+                      dialog: copilot_process_assistant.topic.ThankYou
+              elseActions:
+                - kind: BeginDialog
+                  id: redirect_reset_conversation
+                  dialog: copilot_process_assistant.topic.ResetConversation
+
+      elseActions:
+        - kind: Question
+          id: question_try_again
+          alwaysPrompt: true
+          variable: init:Topic.TryAgain
+          prompt: "Sorry I wasn't able to help you. Would you like to try again?"
+          entity: BooleanPrebuiltEntity
+
+        - kind: ConditionGroup
+          id: condition_check_try_again
+          conditions:
+            - id: condition_user_declines_again
+              condition: =Topic.TryAgain == false
+              actions:
+                - kind: BeginDialog
+                  id: redirect_thank_you_decline
+                  dialog: copilot_process_assistant.topic.ThankYou
+          elseActions:
+            - kind: BeginDialog
+              id: redirect_reset_conversation_retry
+              dialog: copilot_process_assistant.topic.ResetConversation
+

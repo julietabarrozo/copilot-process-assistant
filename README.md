@@ -23,5 +23,19 @@ The agent acts as a centralized knowledge assistant, leveraging organizational d
 
 ---
 
-## 
+## 📁 Repository Structure
+
+```text
+copilot-process-assistant/
+│
+└── src/
+    ├── bots/
+    │   └── configuration.json        # Global agent setup, channels (Teams/M365), and AI settings
+    └── botcomponents/
+        ├── system_instructions.yaml  # System prompts, strict guardrails, and model selection
+        ├── conversation_start.yaml   # Initial greeting and trigger queries
+        ├── search.yaml               # RAG logic, knowledge search, and team fallback
+        ├── customer_satisfaction.yaml# Decision trees for conversation resolution
+        ├── thank_you.yaml            # Adaptive Card schema for user feedback capture
+        └── end_of_conversation.yaml  # Session closure and survey trigger
 

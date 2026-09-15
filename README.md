@@ -19,14 +19,9 @@ The agent acts as a centralized knowledge assistant, leveraging organizational d
 - **Instant SOP Querying:** Synthesizes complex operational procedures into clear, actionable responses.
 - **Knowledge Base Integration:** Retrieves real-time answers from connected organizational repositories.
 - **Time Reduction:** Eliminates manual document searching for operational team members.
+- **Interactive CSAT:** Uses Microsoft Teams Adaptive Cards to collect user feedback directly within the chat stream. 
 
 ---
 
-## 📐 High-Level Architecture
+## 
 
-```mermaid
-graph TD
-    A[👤 User Inquiry] --> B[🤖 Copilot Studio Agent]
-    B --> C{🧠 Model: GPT-4.1}
-    C --> D[📚 Knowledge Base: SOPs & Process Docs]
-    D --> E[💡 Formatted & Concise Response]

@@ -5,8 +5,8 @@ beginDialog:
   priority: -1
   actions:
     - kind: SendActivity
-      id: sendActivity_FtdIWX
-      activity: Hello, I'm {System.Bot.Name} Let me check your answer
+      id: sendActivity_intro
+      activity: "Hello, I'm {System.Bot.Name} Let me check your answer.."
       
     - kind: SearchAndSummarizeContent
       id: search-content
@@ -28,12 +28,12 @@ beginDialog:
           condition: =!IsBlank(Topic.Answer)
           actions:
             - kind: BeginDialog
-              id: cXdVp6
+              id: redirect_end_conversation
               dialog: copilot_process_assistant.topic.EndofConversation
 
-        - id: conditionItem_inlfVP
+        - id: condition_no_answer
           condition: =IsBlank(Topic.Answer)
           actions:
             - kind: SendActivity
-              id: sendActivity_D5qE5C
-              activity: Sorry, I can't help you with that. You can send a message on the Team Chat to get an answer
+              id: sendActivity_fallback
+              activity: "Sorry, I can't help you with that. You can send a message on the Team Chat to get an answer"

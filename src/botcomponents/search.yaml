@@ -1,1 +1,39 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SendActivity
+      id: sendActivity_FtdIWX
+      activity: Hello, I'm {System.Bot.Name} Let me check your answer
+      
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: SearchAllFiles
+          
+      knowledgeSources:
+        kind: SearchAllKnowledgeSources
 
+      responseCaptureType: TextOnly
+
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: BeginDialog
+              id: cXdVp6
+              dialog: copilot_process_assistant.topic.EndofConversation
+
+        - id: conditionItem_inlfVP
+          condition: =IsBlank(Topic.Answer)
+          actions:
+            - kind: SendActivity
+              id: sendActivity_D5qE5C
+              activity: Sorry, I can't help you with that. You can send a message on the Team Chat to get an answer

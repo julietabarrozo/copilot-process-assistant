@@ -1,1 +1,73 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Thank you
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - thanks
+      - thank you
+      - thanks so much
+      - ty
 
+  actions:
+    - kind: SendActivity
+      id: sendMessage_9iz6v7
+      activity: If you need anything else, I'm here!
+
+    - kind: SendActivity
+      id: sendActivity_QEsW4Z
+      activity:
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              {
+                "type": "AdaptiveCard",
+                "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "text": "How would you describe your experience?",
+                    "wrap": true,
+                    "size": "Medium",
+                    "weight": "Bolder"
+                  }
+                ],
+                "actions": [
+                  {
+                    "type": "Action.Submit",
+                    "title": "👍 Good",
+                    "data": {
+                      "msteams": {
+                        "type": "messageBack",
+                        "text": "feedback_good",
+                        "value": "good"
+                      }
+                    }
+                  },
+                  {
+                    "type": "Action.Submit",
+                    "title": "😐 Neutral",
+                    "data": {
+                      "msteams": {
+                        "type": "messageBack",
+                        "text": "feedback_neutral",
+                        "value": "neutral"
+                      }
+                    }
+                  },
+                  {
+                    "type": "Action.Submit",
+                    "title": "👎 Bad",
+                    "data": {
+                      "msteams": {
+                        "type": "messageBack",
+                        "text": "feedback_bad",
+                        "value": "bad"
+                      }
+                    }
+                  }
+                ]
+              }

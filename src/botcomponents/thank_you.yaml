@@ -13,11 +13,11 @@ beginDialog:
 
   actions:
     - kind: SendActivity
-      id: sendMessage_9iz6v7
-      activity: If you need anything else, I'm here!
+      id: sendMessage_thankyou
+      activity: "If you need anything else, I'm here!"
 
     - kind: SendActivity
-      id: sendActivity_QEsW4Z
+      id: sendActivity_feedback_card
       activity:
         attachments:
           - kind: AdaptiveCardTemplate
